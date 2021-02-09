@@ -35,8 +35,8 @@ public class Screen {
 			for (int x = 0; x < width; x++) {
 				int xx = x + xOffset;
 				// if (xx < 0 || xx >= width) break;
-				int tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK)
-								* MAP_SIZE;
+				int tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + 
+						((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
 				pixels[x + y * width] = tiles[tileIndex];
 			}
 		}
