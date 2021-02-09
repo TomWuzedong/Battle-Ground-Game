@@ -10,6 +10,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import battle_ground.graphics.Screen;
+import keyboard.Keyboard;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private Thread thread;
 	private JFrame frame;
+	private Keyboard key;
 	private boolean running = false;
 	
 	private Screen screen;
@@ -37,8 +39,10 @@ public class Game extends Canvas implements Runnable {
 		setPreferredSize(size); // Canvas method;
 		
 		screen = new Screen(width, height);
-		
 		frame = new JFrame();
+		key = new Keyboard();
+		
+		addKeyListener(key);
 	}
 	
 	public synchronized void start() {
@@ -88,10 +92,16 @@ public class Game extends Canvas implements Runnable {
 		}
 		stop();
 	}
+	
 	int x = 0, y = 0;
+	
 	public void update() {
-		x++;
-		y++;
+		key.update();
+		if (key.up) y-=3;
+		if (key.down) y+=3;
+		if (key.left) x-=3;
+		if (key.right) x+=3;
+
 	}
 	
 	public void render() {
